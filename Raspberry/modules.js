@@ -72,6 +72,31 @@ setInterval(() => {
         releIrrigation.writeSync(0);
     }
 
+    getForecats();
+
 }, interval);
 
+
+function getForecats() {
+    
+    const options = {
+        hostname: 'api.weatherapi.com/v1',        
+        path: '/forecast.json?key=a0f81bb37cb847d0bc2140825220901&q=Nachod&days=2&aqi=no&alerts=no',
+        method: 'GET'        
+    }
+
+    const req = https.request(options, res => {
+        console.log(`statusCode: ${res.statusCode}`)
+
+        res.on('data', d => {
+            process.stdout.write(d)
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+    })
+
+    req.end()
+}
 
