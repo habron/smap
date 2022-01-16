@@ -60,7 +60,7 @@ setInterval(() => {
         releLight.writeSync(0);
     }
 
-    if (temperature < temperatureLimit) {
+    if (temperature < (temperatureLimit - 2)) {
         releHeat.writeSync(1);
     } else {
         releHeat.writeSync(0);
@@ -89,7 +89,7 @@ function getForecats() {
         console.log(`statusCode: ${res.statusCode}`)
 
         res.on('data', d => {
-            process.stdout.write(d)
+            process.stdout.write(d)            
         })
     })
 
